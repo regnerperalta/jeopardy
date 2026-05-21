@@ -1,0 +1,150 @@
+/* --- Golden Sun-Tile Board Grid Styles --- */
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--board-cols, 5), 1fr);
+  gap: 12px;
+  padding: 0 1.5rem;
+  max-width: 1400px;
+  
+  /* CHANGE 1: Reduced height ceiling to compress the grid vertically */
+  height: calc(100vh - 280px); 
+  
+  /* CHANGE 2: Added bottom margin to clear the scoreboard entirely (~110px accounts for score bar + safety padding) */
+  margin: 0 auto 110px auto; 
+  box-sizing: border-box;
+}
+
+.category-header {
+  background: var(--azul-flag);
+  color: white;
+  border: 3px solid var(--arena-blanca);
+  padding: 8px 4px; /* CHANGE 3: Squeezed padding slightly for tighter screens */
+  text-align: center;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clue-tile {
+  background: linear-gradient(135deg, var(--sol-oro) 0%, #e59b00 100%);
+  color: #331a00;
+  font-family: 'Titan One', sans-serif;
+  
+  /* CHANGE 4: Shrunk text slightly so it scales down beautifully with smaller buttons */
+  font-size: 1.6rem; 
+  
+  border: 3px solid var(--arena-blanca);
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #b37800, 0 6px 12px rgba(0,0,0,0.4);
+  transition: transform 0.1s ease, filter 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clue-tile:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.clue-tile:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #b37800;
+}
+
+.disabled-tile {
+  background: rgba(255,255,255,0.05);
+  border: 2px dashed rgba(255,255,255,0.15);
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+}
+
+/* --- Floating Window Utilities --- */
+.exit-game-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: transparent;
+  color: #8888aa;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+
+.exit-game-btn:hover {
+  color: #ff3333;
+  background: transparent;
+  transform: scale(1.1);
+}
+
+/* --- Scoreboard Bottom Bar Styles --- */
+.scoreboard-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: rgba(0, 21, 51, 0.95); /* Deep dark blue backing matching body background */
+  border-top: 4px solid var(--azul-flag);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.player-score-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 2px solid rgba(244, 249, 244, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Highlight the active player taking their turn, if applicable */
+.player-score-card.active-turn {
+  border-color: var(--rojo-flag);
+  box-shadow: 0 0 15px rgba(206, 17, 38, 0.4);
+  transform: translateY(-4px);
+}
+
+.player-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--arena-blanca);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+
+.player-score-value {
+  font-family: 'Titan One', sans-serif;
+  font-size: 2.2rem;
+  color: var(--sol-oro);
+  text-shadow: 2px 2px 0px #000;
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* Formatting for negative/minus scores just in case someone misses a question */
+.player-score-value.negative {
+  color: var(--rojo-flag);
+}

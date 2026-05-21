@@ -1,350 +1,100 @@
-/* Base Layout & Theme */
-.jeopardy-container {
-  background-color: #000080;
-  color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  font-family: 'Impact', 'Arial Black', sans-serif;
+/* --- Dominican Festive Theme Variables --- */
+:root {
+  --azul-flag: #002F6C;
+  --rojo-flag: #CE1126;
+  --sol-oro: #FFB81C;
+  --mar-turquesa: #00A3E0;
+  --arena-blanca: #F4F9F4;
+}
+
+body {
+  margin: 0;
+  background-color: #001f47;
+  background-image: radial-gradient(circle at 20% 30%, #002F6C 0%, #001533 100%);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--arena-blanca);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Typographic Overrides --- */
+.jeopardy-title, .splash-banner-text, .category-header {
+  font-family: 'Titan One', cursive;
+  text-shadow: 3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+  letter-spacing: 2px;
 }
 
 .jeopardy-header {
   text-align: center;
-  margin-bottom: 1rem;
+  padding: 1.5rem 0;
+  background: linear-gradient(180deg, rgba(206,17,38,0.3) 0%, rgba(0,0,0,0) 100%);
+  border-bottom: 4px dashed var(--sol-oro);
+  margin-bottom: 2rem;
 }
 
 .jeopardy-title {
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  color: #FFFF00;
+  color: var(--arena-blanca);
+  font-size: 3.2rem;
   margin: 0;
 }
 
-/* Card Overlay Modals */
-.active-card-overlay {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 120px;
-}
-
-.clue-card-content {
-  background-color: #0000a0;
-  border: 4px solid #FFFF00;
-  border-radius: 12px;
-  padding: 3rem 2rem;
-  width: 85%;
-  max-width: 900px;
-  text-align: center;
-}
-
-.card-category {
-  color: #FFFF00;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.big-question-text {
-  font-size: 2.2rem;
-  line-height: 1.4;
-  margin: 2rem 0;
-}
-
-/* Action Buttons */
-.host-controls {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.action-btn {
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  background-color: #FFFF00;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.close-btn {
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Scorekeeper Console */
-.scorekeeper-console {
-  border-top: 2px dashed #FFFF00;
-  padding-top: 1.5rem;
-  margin-top: 2rem;
-}
-
-.console-row {
-  display: flex;
-  justify-content: space-around;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.player-adjustment-card {
-  background-color: #000066;
-  padding: 10px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 200px;
-}
-
-.btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.plus-btn {
-  background-color: #00cc44;
-  color: #fff;
-  border: none;
-  padding: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.minus-btn {
-  background-color: #cc0000;
-  color: #fff;
-  border: none;
-  padding: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* Fixed Bottom Scoreboard */
-.scoreboard {
+/* --- Transitional Curtains Display --- */
+.curtain-splash-screen {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  right: 0;
-  height: 100px;
-  background-color: #000;
-  border-top: 3px solid #FFFF00;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-.player-score-card {
-  text-align: center;
-}
-
-.player-name {
-  font-size: 1.1rem;
-  color: #aaa;
-}
-
-.positive-score {
-  font-size: 2rem;
-  color: #00ff00;
-}
-
-.negative-score {
-  font-size: 2rem;
-  color: #ff3333;
-}
-
-/* Global Messages */
-.centered-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
   height: 100vh;
-  background-color: #000080;
-  color: #fff;
-  font-size: 2rem;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-}
-
-/* Board Grid Components */
-.board-grid {
-  display: grid;
-  /* Uses a fallback of 1 column if the CSS variable isn't injected */
-  grid-template-columns: repeat(var(--board-cols, 1), 1fr);
-  gap: 10px;
-  flex-grow: 1;
-  margin-bottom: 120px;
-}
-
-.category-header {
-  background-color: #0000a0;
-  border: 2px solid #000;
-  padding: 15px 5px;
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60px;
-  text-shadow: 2px 2px #000;
-}
-
-.clue-tile {
-  background-color: #0000ff;
-  border: 2px solid #000;
-  color: #FFFF00;
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: pointer;
-  min-height: 90px;
-  transition: transform 0.1s ease;
-}
-
-.clue-tile:hover {
-  transform: scale(1.02);
-}
-
-.disabled-tile {
-  background-color: #000033;
-  border: 2px solid #000;
-  color: #333366;
-  font-size: 2rem;
-  min-height: 90px;
-  cursor: not-allowed;
-}
-
-.empty-tile {
-  background-color: #000033;
-  min-height: 90px;
-}
-
-/* Landing Page & Setup */
-.setup-screen {
-  flex-grow: 1;
+  z-index: 9999;
+  background-image: linear-gradient(rgba(0, 47, 108, 0.75), rgba(206, 17, 38, 0.75)), url('image_agent_tag_8790645983558314491');
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.setup-card {
-  background-color: #0000a0;
-  border: 4px solid #FFFF00;
-  border-radius: 12px;
-  padding: 3rem 2rem;
-  width: 90%;
-  max-width: 550px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.setup-subtitle {
-  color: #FFFF00;
+.splash-card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 3rem 5rem;
+  border-radius: 30px;
+  border: 6px solid var(--sol-oro);
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 2rem;
-  font-size: 1.5rem;
+  box-shadow: 0 0 50px rgba(0,0,0,0.8);
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 1.5rem;
+.splash-banner-text {
+  color: var(--sol-oro);
+  font-size: 4rem;
+  margin: 0;
 }
 
-.form-group label {
-  font-size: 1.1rem;
-  color: #FFFF00;
-  letter-spacing: 1px;
-}
-
-.setup-input {
-  padding: 12px;
-  font-size: 1.2rem;
-  border: 2px solid #000;
-  background-color: #fff;
-  color: #000;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-}
-
-.setup-input:focus {
-  outline: 3px solid #FFFF00;
-}
-
-.start-game-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 1.5rem;
-  background-color: #FFFF00;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  letter-spacing: 1px;
+.splash-subtext {
+  font-size: 1.4rem;
+  color: var(--arena-blanca);
   margin-top: 1rem;
-  transition: transform 0.1s ease;
 }
 
-.start-game-btn:hover {
-  transform: scale(1.02);
+.island-spinner {
+  margin: 2rem auto 0 auto;
+  width: 60px;
+  height: 60px;
+  border: 6px solid var(--mar-turquesa);
+  border-top-color: var(--sol-oro);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
 }
 
-/* Header Action Utilities */
-.header-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.exit-game-btn {
-  background-color: #cc0000;
-  color: #fff;
-  border: 1px solid #000;
-  padding: 6px 12px;
-  font-size: 0.9rem;
-  font-family: Arial, sans-serif;
-  cursor: pointer;
-  font-weight: bold;
+.animated-zoom {
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.exit-game-btn:hover {
-  background-color: #ff3333;
+@keyframes popIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-/* Header Layout Modifications */
-.jeopardy-header {
-  text-align: center;
-  margin-bottom: 1rem;
-  position: relative; /* 👈 Allows children to anchor absolutely to this container */
-  padding: 0.5rem 0;
-}
-
-.exit-game-btn {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  background: transparent;
-  color: #8888aa;
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  padding: 5px 10px;
-  line-height: 1;
-  font-family: Arial, sans-serif;
-  transition: color 0.1s ease, transform 0.1s ease;
-}
-
-.exit-game-btn:hover {
-  color: #ff3333;
-  background: transparent; /* Overrides any native button block styles */
-  transform: scale(1.1);
-}
+.no-scroll { overflow: hidden; }

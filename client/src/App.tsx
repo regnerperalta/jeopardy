@@ -6,25 +6,23 @@ import "./App.css";
 
 const API_BASE_URL = "https://9qfyhpni04.execute-api.us-east-1.amazonaws.com/prod/";
 
+type AppStage = "SETUP" | "TRANSITION" | "LIVE";
+
 export default function App() {
-  const [isConfigured, setIsConfigured] = useState(false);
-  const [displayTitle, setDisplayTitle] = useState("Herencia Quisqueyana");
+  const [stage, setStage] = useState<AppStage>("SETUP");
+  const [displayTitle, setDisplayTitle] = useState("HERENCIA QUISQUEYANA");
   
   const [clues, setClues] = useState<Clue[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
 
-  // Update signature to collect the title string from our Setup form submission
   const handleStartGame = async (boardId: string, playerNames: string[], gameTitle: string) => {
     const response = await fetch(`${API_BASE_URL}/board?id=${boardId}`);
     if (!response.ok) throw new Error(`Could not find Board ID "${boardId}"`);
     const data = await response.json();
     
-    const fetchedClues: Clue[] = data.clues;
-    setClues(fetchedClues);
-
-    const uniqueCats = Array.from(new Set(fetchedClues.map((c) => c.category)));
-    setCategories(uniqueCats);
+    setClues(data.clues);
+    setCategories(Array.from(new Set(data.clues.map((c: any) => c.category))));
 
     const activePlayers = playerNames
       .map((name) => name.trim())
@@ -32,29 +30,47 @@ export default function App() {
       .map((name) => ({ name, score: 0 }));
 
     setPlayers(activePlayers.length ? activePlayers : [{ name: "Contestant 1", score: 0 }]);
-    setDisplayTitle(gameTitle); // 👈 Set custom title state string
-    setIsConfigured(true);
+    setDisplayTitle(gameTitle);
+    
+    // Trigger transition curtain drop sequence
+    setStage("TRANSITION");
+    setTimeout(() => {
+      setStage("LIVE");
+    }, 2500);
   };
 
   const handleLeaveGame = () => {
-    if (window.confirm("Are you sure you want to exit the current board layout? Scores will be reset.")) {
+    if (window.confirm("Are you sure you want to exit? Scores will be reset.")) {
       setClues([]);
       setCategories([]);
       setPlayers([]);
-      setIsConfigured(false);
+      setStage("SETUP");
     }
   };
 
   return (
-    <div className="jeopardy-container">
-      <header className="jeopardy-header">
-        {/* Render the title string dynamically from state! */}
-        <h1 className="jeopardy-title">{displayTitle.toUpperCase()}</h1>
-      </header>
+    <div className={`jeopardy-container ${stage === "TRANSITION" ? "no-scroll" : ""}`}>
+      {stage !== "TRANSITION" && (
+        <header className="jeopardy-header">
+          <h1 className="jeopardy-title">{displayTitle.toUpperCase()}</h1>
+        </header>
+      )}
 
-      {!isConfigured ? (
+      {stage === "SETUP" && (
         <GameSetup onGameStart={handleStartGame} />
-      ) : (
+      )}
+
+      {stage === "TRANSITION" && (
+        <div className="curtain-splash-screen">
+          <div className="splash-card animated-zoom">
+            <h1 className="splash-banner-text">¡PREPÁRATE!</h1>
+            <p className="splash-subtext">Cargando Tablero de {displayTitle}</p>
+            <div className="island-spinner" />
+          </div>
+        </div>
+      )}
+
+      {stage === "LIVE" && (
         <Board 
           categories={categories} 
           initialClues={clues} 

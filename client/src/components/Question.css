@@ -1,0 +1,162 @@
+/* --- Active Question Modal Overlay --- */
+.active-card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 110px); /* Keeps the bottom score bar completely visible */
+  background: rgba(0, 15, 36, 0.9); /* Deep dark blue backdrop shield */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 90;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* --- Core Card Board Container --- */
+.clue-card-content {
+  background: linear-gradient(145deg, #002d62 0%, var(--azul-flag) 100%);
+  border: 4px solid var(--arena-blanca);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 850px;
+  padding: 3rem 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Category Subheader Banner */
+.card-category {
+  color: var(--sol-oro);
+  font-family: 'Titan One', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* High-Impact Center Clue/Answer Typography */
+.big-question-text {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--arena-blanca);
+  line-height: 1.4;
+  margin: 1rem 0;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Gameplay Action Control Layout --- */
+.host-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.action-btn, .close-btn {
+  font-family: 'Titan One', sans-serif;
+  font-size: 1.4rem;
+  padding: 0.75rem 2.5rem;
+  border: 3px solid var(--arena-blanca);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Golden Reveal Accent */
+.action-btn {
+  background: linear-gradient(135deg, var(--sol-oro) 0%, #e59b00 100%);
+  color: #331a00;
+  box-shadow: 0 4px 0 #b37800;
+}
+
+/* Red Return Accent */
+.close-btn {
+  background: linear-gradient(135deg, var(--rojo-flag) 0%, #a60d1b 100%);
+  color: white;
+  box-shadow: 0 4px 0 #730912;
+}
+
+.action-btn:hover, .close-btn:hover {
+  filter: brightness(1.1);
+}
+
+.action-btn:active, .close-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+/* --- Bottom Scorekeeper Interface --- */
+.scorekeeper-console {
+  border-top: 2px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+}
+
+.scorekeeper-console h4 {
+  color: rgba(244, 249, 244, 0.7);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.console-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.player-adjustment-card {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 160px;
+}
+
+.player-adjustment-card span {
+  color: var(--arena-blanca);
+  font-size: 1rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-group button {
+  flex: 1;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: opacity 0.1s ease;
+}
+
+.btn-group button:hover {
+  opacity: 0.9;
+}
+
+.plus-btn {
+  background: #2e7d32; /* Deep emerald adjustment green */
+}
+
+.minus-btn {
+  background: var(--rojo-flag); /* Standard flag red for drops */
+}

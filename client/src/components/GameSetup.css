@@ -1,0 +1,92 @@
+/* --- Setup Page Branding Assets --- */
+.setup-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.setup-card {
+  background: rgba(244, 249, 244, 0.96);
+  color: #111;
+  border-radius: 24px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 0 8px var(--rojo-flag);
+}
+
+/* Container Box Frame */
+.setup-vector-branding {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 10px 0;
+  width: 100%;
+}
+
+/* Sizing wrapper for the image element */
+.dr-flag-map-mask {
+  width: 260px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The Icon: Native SVG scales inside this cleanly */
+.dr-brand-icon {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  /* Applies a neat drop-shadow wrapped directly to the island shape outline! */
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Smooth animated lift when a user hovers over the card region */
+.dr-flag-map-mask:hover .dr-brand-icon {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.setup-subtitle {
+  text-align: center;
+  color: var(--azul-flag);
+  font-weight: 800;
+  margin-top: 0;
+}
+
+.setup-input {
+  width: 100%;
+  padding: 12px;
+  border: 3px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.setup-input:focus {
+  border-color: var(--azul-flag);
+  outline: none;
+}
+
+.start-game-btn {
+  width: 100%;
+  background: var(--rojo-flag);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #8a0b18;
+  transition: transform 0.1s ease;
+}
+
+.start-game-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #8a0b18;
+}

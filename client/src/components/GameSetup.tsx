@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import drMapUrl from '../assets/dominican-map.svg';
+import "./GameSetup.css";
 
 interface GameSetupProps {
   onGameStart: (boardId: string, playerNames: string[], gameTitle: string) => Promise<void>;
@@ -35,6 +37,16 @@ export default function GameSetup({ onGameStart }: GameSetupProps) {
   return (
     <div className="setup-screen">
       <form className="setup-card" onSubmit={handleSubmit}>
+        <div className="setup-vector-branding">
+        <div className="dr-flag-map-mask">
+            <img 
+            src={drMapUrl}
+            alt="Dominican Republic Map Outline Overlay" 
+            className="dr-brand-icon" 
+            />
+        </div>
+        </div>
+
         <h2 className="setup-subtitle">Game Engine Configuration</h2>
         
         {error && (
