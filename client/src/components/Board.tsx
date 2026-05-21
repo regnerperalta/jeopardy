@@ -85,14 +85,15 @@ export default function Board({ categories, initialClues, initialPlayers, onLeav
       )}
 
       {/* Keep scoreboard persistent at bottom of screen */}
-      <div className="scoreboard-container">
-        {players.map((player) => (
-          <div key={player.id} className="player-score-card">
+        <div className="scoreboard-container">
+        {players.map((player, idx) => (
+            /* Changed key from player.id to idx to avoid the TS error */
+            <div key={idx} className="player-score-card">
             <span className="player-name">{player.name}</span>
             <p className="player-score-value">${player.score}</p>
-          </div>
+            </div>
         ))}
-      </div>
+        </div>
     </>
   );
 }
