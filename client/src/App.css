@@ -1,184 +1,350 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
+/* Base Layout & Theme */
+.jeopardy-container {
+  background-color: #000080;
+  color: #ffffff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
+  padding: 1rem;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+}
+
+.jeopardy-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.jeopardy-title {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: #FFFF00;
+  margin: 0;
+}
+
+/* Card Overlay Modals */
+.active-card-overlay {
   flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 120px;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.clue-card-content {
+  background-color: #0000a0;
+  border: 4px solid #FFFF00;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  width: 85%;
+  max-width: 900px;
+  text-align: center;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.card-category {
+  color: #FFFF00;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.big-question-text {
+  font-size: 2.2rem;
+  line-height: 1.4;
+  margin: 2rem 0;
+}
+
+/* Action Buttons */
+.host-controls {
+  margin: 2rem 0;
   display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.action-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #FFFF00;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Scorekeeper Console */
+.scorekeeper-console {
+  border-top: 2px dashed #FFFF00;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.console-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.player-adjustment-card {
+  background-color: #000066;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  min-width: 200px;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.ticks {
-  position: relative;
+.plus-btn {
+  background-color: #00cc44;
+  color: #fff;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.minus-btn {
+  background-color: #cc0000;
+  color: #fff;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Fixed Bottom Scoreboard */
+.scoreboard {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-color: #000;
+  border-top: 3px solid #FFFF00;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.player-score-card {
+  text-align: center;
+}
+
+.player-name {
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+.positive-score {
+  font-size: 2rem;
+  color: #00ff00;
+}
+
+.negative-score {
+  font-size: 2rem;
+  color: #ff3333;
+}
+
+/* Global Messages */
+.centered-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000080;
+  color: #fff;
+  font-size: 2rem;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+}
+
+/* Board Grid Components */
+.board-grid {
+  display: grid;
+  /* Uses a fallback of 1 column if the CSS variable isn't injected */
+  grid-template-columns: repeat(var(--board-cols, 1), 1fr);
+  gap: 10px;
+  flex-grow: 1;
+  margin-bottom: 120px;
+}
+
+.category-header {
+  background-color: #0000a0;
+  border: 2px solid #000;
+  padding: 15px 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  text-shadow: 2px 2px #000;
+}
+
+.clue-tile {
+  background-color: #0000ff;
+  border: 2px solid #000;
+  color: #FFFF00;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  min-height: 90px;
+  transition: transform 0.1s ease;
+}
+
+.clue-tile:hover {
+  transform: scale(1.02);
+}
+
+.disabled-tile {
+  background-color: #000033;
+  border: 2px solid #000;
+  color: #333366;
+  font-size: 2rem;
+  min-height: 90px;
+  cursor: not-allowed;
+}
+
+.empty-tile {
+  background-color: #000033;
+  min-height: 90px;
+}
+
+/* Landing Page & Setup */
+.setup-screen {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.setup-card {
+  background-color: #0000a0;
+  border: 4px solid #FFFF00;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.setup-subtitle {
+  color: #FFFF00;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  color: #FFFF00;
+  letter-spacing: 1px;
+}
+
+.setup-input {
+  padding: 12px;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  background-color: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.setup-input:focus {
+  outline: 3px solid #FFFF00;
+}
+
+.start-game-btn {
   width: 100%;
+  padding: 16px;
+  font-size: 1.5rem;
+  background-color: #FFFF00;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+  transition: transform 0.1s ease;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.start-game-btn:hover {
+  transform: scale(1.02);
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+/* Header Action Utilities */
+.header-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.exit-game-btn {
+  background-color: #cc0000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.exit-game-btn:hover {
+  background-color: #ff3333;
+}
+
+/* Header Layout Modifications */
+.jeopardy-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative; /* 👈 Allows children to anchor absolutely to this container */
+  padding: 0.5rem 0;
+}
+
+.exit-game-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: transparent;
+  color: #8888aa;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+  transition: color 0.1s ease, transform 0.1s ease;
+}
+
+.exit-game-btn:hover {
+  color: #ff3333;
+  background: transparent; /* Overrides any native button block styles */
+  transform: scale(1.1);
 }
