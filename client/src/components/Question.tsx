@@ -1,4 +1,5 @@
 import type { Clue, Player } from "../types/game";
+import { GAME_LABELS } from "../constants/gameConfig";
 import "./Question.css";
 
 interface QuestionProps {
@@ -23,33 +24,36 @@ export default function Question({
       <div className="clue-card-content">
         <h3 className="card-category">{activeClue.category.toUpperCase()}</h3>
         <p className="big-question-text">
-          {showAnswer ? `ANSWER: ${activeClue.answer}` : `CLUE: ${activeClue.question}`}
+          {showAnswer 
+            ? `${GAME_LABELS.ANSWER_PREFIX}${activeClue.answer}` 
+            : `${GAME_LABELS.CLUE_PREFIX}${activeClue.question}`
+          }
         </p>
         
         <div className="host-controls">
           {!showAnswer ? (
             <button className="action-btn" onClick={() => setShowAnswer(true)}>
-              Reveal Answer
+              {GAME_LABELS.REVEAL_ANSWER}
             </button>
           ) : (
             <button className="close-btn" onClick={onClose}>
-              Return to Board
+              {GAME_LABELS.RETURN_TO_BOARD}
             </button>
           )}
         </div>
 
         <div className="scorekeeper-console">
-          <h4>Scorekeeper Console: Adjust Player Points</h4>
+          <h4>{GAME_LABELS.CONSOLE_TITLE}</h4>
           <div className="console-row">
             {players.map((p, idx) => (
               <div key={idx} className="player-adjustment-card">
                 <span><strong>{p.name}</strong></span>
                 <div className="btn-group">
                   <button className="plus-btn" onClick={() => onAdjustScore(idx, activeClue.points, true)}>
-                    Correct (+${activeClue.points})
+                    {GAME_LABELS.CORRECT_PREFIX}{activeClue.points}{GAME_LABELS.CLOSE_PAREN}
                   </button>
                   <button className="minus-btn" onClick={() => onAdjustScore(idx, activeClue.points, false)}>
-                    Incorrect (-${activeClue.points})
+                    {GAME_LABELS.INCORRECT_PREFIX}{activeClue.points}{GAME_LABELS.CLOSE_PAREN}
                   </button>
                 </div>
               </div>

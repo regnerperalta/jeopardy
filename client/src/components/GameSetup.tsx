@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SETUP_LABELS } from "../constants/gameConfig"; // Ajusta la ruta según tu proyecto
 import drMapUrl from '../assets/dominican-map.svg';
 import "./GameSetup.css";
 
@@ -7,9 +8,10 @@ interface GameSetupProps {
 }
 
 export default function GameSetup({ onGameStart }: GameSetupProps) {
-  const [gameTitle, setGameTitle] = useState("Herencia Quisqueyana");
-  const [boardId, setBoardId] = useState("001");
-  const [nameInputs, setNameInputs] = useState<string[]>(["Player 1", "Player 2", "Player 3"]);
+  const [gameTitle, setGameTitle] = useState<string>(SETUP_LABELS.DEFAULT_GAME_TITLE);
+  const [boardId, setBoardId] = useState<string>(SETUP_LABELS.DEFAULT_BOARD_ID);
+
+  const [nameInputs, setNameInputs] = useState<string[]>([...SETUP_LABELS.DEFAULT_PLAYER_NAMES]);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -20,9 +22,13 @@ export default function GameSetup({ onGameStart }: GameSetupProps) {
 
     try {
       // Pass the new title state value up to the orchestrator component
-      await onGameStart(boardId, nameInputs, gameTitle.trim() || "JEOPARDY");
+      await onGameStart(
+        boardId, 
+        nameInputs, 
+        gameTitle.trim() || SETUP_LABELS.FALLBACK_ORCHESTRATOR_TITLE
+      );
     } catch (err: any) {
-      setError(err.message || "An issue occurred querying this deck from the database.");
+      setError(err.message || SETUP_LABELS.DEFAULT_ERROR_MESSAGE);
     } finally {
       setSubmitting(false);
     }
@@ -32,22 +38,24 @@ export default function GameSetup({ onGameStart }: GameSetupProps) {
     setNameInputs((prev) => prev.map((n, idx) => (idx === index ? value : n)));
   };
 
-  if (submitting) return <div className="centered-message">Querying DynamoDB Deck...</div>;
+  if (submitting) {
+    return <div className="centered-message">{SETUP_LABELS.SUBMITTING_MESSAGE}</div>;
+  }
 
   return (
     <div className="setup-screen">
       <form className="setup-card" onSubmit={handleSubmit}>
         <div className="setup-vector-branding">
-        <div className="dr-flag-map-mask">
+          <div className="dr-flag-map-mask">
             <img 
-            src={drMapUrl}
-            alt="Dominican Republic Map Outline Overlay" 
-            className="dr-brand-icon" 
+              src={drMapUrl}
+              alt={SETUP_LABELS.MAP_ALT_TEXT} 
+              className="dr-brand-icon" 
             />
-        </div>
+          </div>
         </div>
 
-        <h2 className="setup-subtitle">Game Engine Configuration</h2>
+        <h2 className="setup-subtitle">{SETUP_LABELS.CONFIG_TITLE}</h2>
         
         {error && (
           <div style={{ color: "#ff3333", marginBottom: "1rem", fontWeight: "bold", textAlign: "center" }}>
@@ -55,49 +63,51 @@ export default function GameSetup({ onGameStart }: GameSetupProps) {
           </div>
         )}
 
-        {/* NEW: Dynamic Game Title Input */}
+        {/* Dynamic Game Title Input */}
         <div className="form-group">
-          <label htmlFor="gameTitle">GAME DISPLAY TITLE</label>
+          <label htmlFor="gameTitle">{SETUP_LABELS.LABEL_GAME_TITLE}</label>
           <input
             id="gameTitle"
             type="text"
             className="setup-input"
             value={gameTitle}
             onChange={(e) => setGameTitle(e.target.value)}
-            placeholder="e.g., Herencia Quisqueyana"
+            placeholder={SETUP_LABELS.PLACEHOLDER_GAME_TITLE}
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="boardId">DYNAMODB BOARD ID</label>
+          <label htmlFor="boardId">{SETUP_LABELS.LABEL_BOARD_ID}</label>
           <input
             id="boardId"
             type="text"
             className="setup-input"
             value={boardId}
             onChange={(e) => setBoardId(e.target.value)}
-            placeholder="e.g., 001, 002"
+            placeholder={SETUP_LABELS.PLACEHOLDER_BOARD_ID}
             required
           />
         </div>
 
         {nameInputs.map((name, idx) => (
           <div className="form-group" key={idx}>
-            <label htmlFor={`player-${idx}`}>PLAYER {idx + 1} NAME</label>
+            <label htmlFor={`player-${idx}`}>
+              {SETUP_LABELS.LABEL_PLAYER_PREFIX}{idx + 1}{SETUP_LABELS.LABEL_PLAYER_SUFFIX}
+            </label>
             <input
               id={`player-${idx}`}
               type="text"
               className="setup-input"
               value={name}
               onChange={(e) => handlePlayerNameChange(idx, e.target.value)}
-              placeholder={`Contestant ${idx + 1}`}
+              placeholder={`${SETUP_LABELS.PLACEHOLDER_PLAYER_PREFIX}${idx + 1}`}
             />
           </div>
         ))}
 
         <button type="submit" className="start-game-btn">
-          LAUNCH GAME BOARD
+          {SETUP_LABELS.LAUNCH_BTN_TEXT}
         </button>
       </form>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { BoardProps, Clue, Player } from "../types/game";
+import { BOARD_LABELS } from "../constants/gameConfig";
 import Question from "./Question";
 import "./Board.css";
 
@@ -31,17 +32,15 @@ export default function Board({ categories, initialClues, initialPlayers, onLeav
 
   return (
     <>
-      {/* Absolute Header Interceptor for the Close Action */}
+      {/* Close Button */}
       <button 
         className="exit-game-btn" 
         onClick={onLeaveGame}
-        title="Leave current board"
-        aria-label="Leave current board"
       >
         ✕
       </button>
 
-      {/* CONDITIONAL RENDER: Active Selection View vs Grid Layout */}
+      {/* View vs Grid Layout */}
       {!activeClue ? (
         <div 
           className="board-grid" 
@@ -67,7 +66,7 @@ export default function Board({ categories, initialClues, initialPlayers, onLeav
                   className={clue.isRevealed ? "disabled-tile" : "clue-tile"}
                   onClick={() => setActiveClue(clue)}
                 >
-                  ${clue.points}
+                  {BOARD_LABELS.POINT_PREFIX}{clue.points}
                 </button>
               );
             })
@@ -84,16 +83,17 @@ export default function Board({ categories, initialClues, initialPlayers, onLeav
         />
       )}
 
-      {/* Keep scoreboard persistent at bottom of screen */}
-        <div className="scoreboard-container">
+      {/* Scoreboard */}
+      <div className="scoreboard-container">
         {players.map((player, idx) => (
-            /* Changed key from player.id to idx to avoid the TS error */
-            <div key={idx} className="player-score-card">
+          <div key={idx} className="player-score-card">
             <span className="player-name">{player.name}</span>
-            <p className="player-score-value">${player.score}</p>
-            </div>
+            <p className="player-score-value">
+              {BOARD_LABELS.POINT_PREFIX}{player.score}
+            </p>
+          </div>
         ))}
-        </div>
+      </div>
     </>
   );
 }
